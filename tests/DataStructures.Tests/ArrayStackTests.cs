@@ -61,6 +61,14 @@ public class ArrayStackTests
     }
 
     [Fact]
+    public void Peek_EmptyStack_ThrowsInvalidOperationException()
+    {
+        ArrayStack<int> stack = new();
+
+        Assert.Throws<InvalidOperationException>(() => stack.Peek());
+    }
+
+    [Fact]
     public void Resize_KeepsItemsInLifoOrder()
     {
         ArrayStack<int> stack = new(initialCapacity: 2);

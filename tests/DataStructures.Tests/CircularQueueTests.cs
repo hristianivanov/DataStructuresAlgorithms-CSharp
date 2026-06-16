@@ -61,6 +61,14 @@ public class CircularQueueTests
     }
 
     [Fact]
+    public void Peek_EmptyQueue_ThrowsInvalidOperationException()
+    {
+        CircularQueue<int> queue = new();
+
+        Assert.Throws<InvalidOperationException>(() => queue.Peek());
+    }
+
+    [Fact]
     public void CircularBehavior_KeepsItemsInFifoOrderAfterWrapping()
     {
         CircularQueue<int> queue = new(initialCapacity: 3);
@@ -92,6 +100,23 @@ public class CircularQueueTests
         Assert.Equal(1, queue.Dequeue());
         Assert.Equal(2, queue.Dequeue());
         Assert.Equal(3, queue.Dequeue());
+    }
+
+    [Fact]
+    public void Resize_AfterWrapping_KeepsItemsInFifoOrder()
+    {
+        CircularQueue<int> queue = new(initialCapacity: 3);
+        queue.Enqueue(1);
+        queue.Enqueue(2);
+        queue.Enqueue(3);
+        Assert.Equal(1, queue.Dequeue());
+        Assert.Equal(2, queue.Dequeue());
+        queue.Enqueue(4);
+        queue.Enqueue(5);
+
+        queue.Enqueue(6);
+
+        Assert.Equal([3, 4, 5, 6], queue.ToEnumerable());
     }
 
     [Fact]

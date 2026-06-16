@@ -181,11 +181,10 @@ dotnet test DataStructuresAlgorithms.sln
 - A queue is useful when items must be processed in arrival order.
 - Circular arrays avoid shifting queue items after every dequeue.
 
-## Roadmap for Days 2-7
+## Roadmap for Days 3-7
 
 | Day | Topic |
 | --- | --- |
-| Day 2 | Stack and Queue |
 | Day 3 | Hash Table basics |
 | Day 4 | Searching and Basic Sorting |
 | Day 5 | Merge Sort and Quick Sort |
