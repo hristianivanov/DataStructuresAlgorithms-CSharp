@@ -41,6 +41,16 @@ public class SeparateChainingHashTableTests
     }
 
     [Fact]
+    public void NullKeyOperations_ThrowArgumentNullException()
+    {
+        SeparateChainingHashTable<string, int> table = new();
+
+        Assert.Throws<ArgumentNullException>(() => table.ContainsKey(null!));
+        Assert.Throws<ArgumentNullException>(() => table.TryGetValue(null!, out _));
+        Assert.Throws<ArgumentNullException>(() => table.Remove(null!));
+    }
+
+    [Fact]
     public void ContainsKey_ExistingKey_ReturnsTrue()
     {
         SeparateChainingHashTable<string, int> table = new();
@@ -123,6 +133,20 @@ public class SeparateChainingHashTableTests
     }
 
     [Fact]
+    public void ToEnumerable_ReturnsAllEntries()
+    {
+        SeparateChainingHashTable<string, int> table = new();
+        table.Add("one", 1);
+        table.Add("two", 2);
+
+        Dictionary<string, int> entries = table.ToEnumerable().ToDictionary(pair => pair.Key, pair => pair.Value);
+
+        Assert.Equal(2, entries.Count);
+        Assert.Equal(1, entries["one"]);
+        Assert.Equal(2, entries["two"]);
+    }
+
+    [Fact]
     public void Resize_KeepsAllExistingValuesAccessible()
     {
         SeparateChainingHashTable<int, string> table = new(initialCapacity: 2);
@@ -154,6 +178,24 @@ public class SeparateChainingHashTableTests
         Assert.Equal("value-1", firstValue);
         Assert.Equal("value-2", secondValue);
         Assert.Equal(2, table.Count);
+    }
+
+    [Fact]
+    public void Remove_CollidingKey_RemovesOnlyMatchingEntry()
+    {
+        SeparateChainingHashTable<CollisionKey, string> table = new(initialCapacity: 4);
+        CollisionKey first = new("first");
+        CollisionKey second = new("second");
+        table.Add(first, "value-1");
+        table.Add(second, "value-2");
+
+        bool wasRemoved = table.Remove(first);
+
+        Assert.True(wasRemoved);
+        Assert.False(table.ContainsKey(first));
+        Assert.True(table.TryGetValue(second, out string? secondValue));
+        Assert.Equal("value-2", secondValue);
+        Assert.Equal(1, table.Count);
     }
 
     private sealed class CollisionKey(string value)

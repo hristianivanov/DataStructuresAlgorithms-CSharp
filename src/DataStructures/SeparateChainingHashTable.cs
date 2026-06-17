@@ -57,7 +57,6 @@ public sealed class SeparateChainingHashTable<TKey, TValue>
     public void Add(TKey key, TValue value)
     {
         ValidateKey(key);
-        EnsureCapacityForNextEntry();
 
         int bucketIndex = GetBucketIndex(key);
         Entry? current = _buckets[bucketIndex];
@@ -72,6 +71,8 @@ public sealed class SeparateChainingHashTable<TKey, TValue>
             current = current.Next;
         }
 
+        EnsureCapacityForNextEntry();
+        bucketIndex = GetBucketIndex(key);
         _buckets[bucketIndex] = new Entry(key, value, _buckets[bucketIndex]);
         Count++;
     }
