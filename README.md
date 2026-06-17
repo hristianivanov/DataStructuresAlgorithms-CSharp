@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository contains clean, tested implementations of common data structures and algorithms in C#. Day 1 introduced a generic singly linked list, and Day 2 adds array-backed stack and queue implementations.
+This repository contains clean, tested implementations of common data structures and algorithms in C#. Day 1 introduced a generic singly linked list, Day 2 added array-backed stack and queue implementations, and Day 3 adds a hash table using separate chaining.
 
 ## Purpose
 
@@ -30,12 +30,14 @@ DataStructuresAlgorithms-CSharp/
 |       |-- DataStructures.csproj
 |       |-- ArrayStack.cs
 |       |-- CircularQueue.cs
+|       |-- SeparateChainingHashTable.cs
 |       `-- SinglyLinkedList.cs
 |-- tests/
 |   `-- DataStructures.Tests/
 |       |-- DataStructures.Tests.csproj
 |       |-- ArrayStackTests.cs
 |       |-- CircularQueueTests.cs
+|       |-- SeparateChainingHashTableTests.cs
 |       `-- SinglyLinkedListTests.cs
 `-- README.md
 ```
@@ -46,10 +48,12 @@ DataStructuresAlgorithms-CSharp/
 - `src/DataStructures/DataStructures.csproj`: Defines the .NET 8 class library with nullable reference types enabled.
 - `src/DataStructures/ArrayStack.cs`: Contains the generic array-backed stack implementation.
 - `src/DataStructures/CircularQueue.cs`: Contains the generic circular-array queue implementation.
+- `src/DataStructures/SeparateChainingHashTable.cs`: Contains the generic hash table implementation using separate chaining.
 - `src/DataStructures/SinglyLinkedList.cs`: Contains the generic singly linked list implementation and its private node type.
 - `tests/DataStructures.Tests/DataStructures.Tests.csproj`: Defines the .NET 8 xUnit test project and references the class library.
 - `tests/DataStructures.Tests/ArrayStackTests.cs`: Verifies stack behavior, resizing, exceptions, and clearing.
 - `tests/DataStructures.Tests/CircularQueueTests.cs`: Verifies queue behavior, circular wrapping, resizing, exceptions, and clearing.
+- `tests/DataStructures.Tests/SeparateChainingHashTableTests.cs`: Verifies hash table behavior, duplicate keys, null keys, resizing, and collisions.
 - `tests/DataStructures.Tests/SinglyLinkedListTests.cs`: Verifies empty-list behavior, additions, removals, searches, nullable values, custom equality, enumeration, and count updates.
 - `README.md`: Documents the repository, implementation, commands, learning notes, roadmap, and commit plan.
 
@@ -59,7 +63,8 @@ DataStructuresAlgorithms-CSharp/
 | --- | --- | --- |
 | Day 1 | Singly Linked List | Done |
 | Day 2 | Stack and Queue | Done |
-| Day 3 | Hash Table basics | Next |
+| Day 3 | Hash Table basics | Done |
+| Day 4 | Searching and Basic Sorting | Next |
 
 ## Singly Linked List Explanation
 
@@ -111,6 +116,37 @@ The `CircularQueue<T>` supports:
 - `Clear()`: Removes all items.
 - `ToEnumerable()`: Enumerates items from front to back.
 
+## Hash Table
+
+A hash table stores key-value pairs and uses a hash code to decide where each key should live in an internal bucket array. A good hash function spreads keys across buckets so lookup, insertion, and removal are usually very fast.
+
+The `SeparateChainingHashTable<TKey, TValue>` uses `EqualityComparer<TKey>.Default` to compare keys. Null keys are rejected with `ArgumentNullException`, and adding the same key twice throws `ArgumentException`.
+
+### Hashing
+
+Hashing converts a key into an integer hash code. The hash table maps that hash code to a bucket index with modulo arithmetic. For example, a hash code can be mapped into an array index from `0` to `bucketCount - 1`.
+
+### Collisions
+
+A collision happens when two different keys map to the same bucket. Collisions are normal and must be handled correctly.
+
+### Separate Chaining
+
+Separate chaining handles collisions by storing a linked chain of entries inside each bucket. If multiple keys map to the same bucket, the hash table walks that bucket's chain to find the matching key.
+
+The hash table resizes when adding an entry would push the load factor above `0.75`. Resizing creates a larger bucket array and reassigns existing entries to their new buckets.
+
+The `SeparateChainingHashTable<TKey, TValue>` supports:
+
+- `Add(TKey key, TValue value)`: Adds a new key-value pair.
+- `Remove(TKey key)`: Removes a key-value pair by key.
+- `ContainsKey(TKey key)`: Reports whether a key exists.
+- `TryGetValue(TKey key, out TValue value)`: Gets a value when the key exists.
+- `Count`: Returns the number of key-value pairs.
+- `IsEmpty`: Reports whether the hash table has no entries.
+- `Clear()`: Removes all entries.
+- `ToEnumerable()`: Enumerates all key-value pairs.
+
 ## Big O Complexity
 
 ### Singly Linked List
@@ -149,6 +185,19 @@ The `CircularQueue<T>` supports:
 | `Clear` | O(n) | O(1) |
 | `ToEnumerable` | O(n) | O(1) |
 
+### Hash Table
+
+| Operation | Average Time Complexity | Worst Time Complexity | Extra Space |
+| --- | --- | --- | --- |
+| `Add` | O(1) amortized | O(n) | O(1) |
+| `Remove` | O(1) | O(n) | O(1) |
+| `ContainsKey` | O(1) | O(n) | O(1) |
+| `TryGetValue` | O(1) | O(n) | O(1) |
+| `Count` | O(1) | O(1) | O(1) |
+| `IsEmpty` | O(1) | O(1) | O(1) |
+| `Clear` | O(n) | O(n) | O(1) |
+| `ToEnumerable` | O(n) | O(n) | O(1) |
+
 ## How to Run
 
 Build the complete solution from the repository root:
@@ -180,12 +229,14 @@ dotnet test DataStructuresAlgorithms.sln
 - A stack is useful when the most recent item must be processed first.
 - A queue is useful when items must be processed in arrival order.
 - Circular arrays avoid shifting queue items after every dequeue.
+- Hash tables trade ordering for fast key-based access.
+- Collisions are expected, so collision handling is part of the data structure design.
+- Separate chaining keeps collision logic readable by linking entries in the same bucket.
 
-## Roadmap for Days 3-7
+## Roadmap for Days 4-7
 
 | Day | Topic |
 | --- | --- |
-| Day 3 | Hash Table basics |
 | Day 4 | Searching and Basic Sorting |
 | Day 5 | Merge Sort and Quick Sort |
 | Day 6 | Binary Search Tree |
