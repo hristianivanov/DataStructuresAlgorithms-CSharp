@@ -25,6 +25,16 @@ public class SearchingAlgorithmsTests
     }
 
     [Fact]
+    public void LinearSearch_EmptyInput_ReturnsMinusOne()
+    {
+        int[] items = [];
+
+        int index = LinearSearch.IndexOf(items, 10);
+
+        Assert.Equal(-1, index);
+    }
+
+    [Fact]
     public void LinearSearch_WorksWithStrings()
     {
         string[] items = ["alpha", "beta", "gamma"];
@@ -52,6 +62,16 @@ public class SearchingAlgorithmsTests
         int index = BinarySearch.IndexOf(items, 99);
 
         Assert.Equal(-1, index);
+    }
+
+    [Fact]
+    public void BinarySearch_WorksWithStrings()
+    {
+        string[] items = ["apple", "orange", "pear"];
+
+        int index = BinarySearch.IndexOf(items, "orange");
+
+        Assert.Equal(1, index);
     }
 
     [Fact]

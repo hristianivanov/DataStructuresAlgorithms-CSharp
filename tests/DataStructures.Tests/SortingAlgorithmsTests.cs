@@ -41,6 +41,12 @@ public class SortingAlgorithmsTests
     }
 
     [Fact]
+    public void SortingAlgorithms_HandleEmptyArray()
+    {
+        AssertAllSortingAlgorithms<int>([], []);
+    }
+
+    [Fact]
     public void SortingAlgorithms_HandleReverseSortedArray()
     {
         AssertAllSortingAlgorithms([5, 4, 3, 2, 1], [1, 2, 3, 4, 5]);

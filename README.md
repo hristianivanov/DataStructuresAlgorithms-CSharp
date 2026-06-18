@@ -171,7 +171,7 @@ Searching algorithms locate a target value inside a collection and return its in
 
 ### Linear Search
 
-Linear search checks each item from left to right until it finds the target. It works on unsorted input and uses `EqualityComparer<T>.Default` for comparisons.
+Linear search checks each item from left to right until it finds the target. It works on unsorted input, handles empty input by returning `-1`, and uses `EqualityComparer<T>.Default` for comparisons.
 
 Linear search is simple and reliable, but it may need to inspect every item.
 
@@ -179,11 +179,11 @@ Linear search is simple and reliable, but it may need to inspect every item.
 
 Binary search works on sorted input. It repeatedly compares the target with the middle item and discards half of the remaining search range.
 
-Binary search uses `Comparer<T>.Default`, returns the matching index when found, and returns `-1` when the target is missing.
+Binary search uses `Comparer<T>.Default`, returns the matching index when found, and returns `-1` when the target is missing or the input is empty.
 
 ## Sorting
 
-Sorting algorithms reorder values into ascending order. Day 4 includes simple in-place sorting algorithms that are useful for learning comparisons, swaps, and nested loops.
+Sorting algorithms reorder values into ascending order. Day 4 includes simple in-place sorting algorithms that use `Comparer<T>.Default` and are useful for learning comparisons, swaps, and nested loops.
 
 ### Bubble Sort
 
