@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository contains clean, tested implementations of common data structures and algorithms in C#. Day 1 introduced a generic singly linked list, Day 2 added array-backed stack and queue implementations, and Day 3 adds a hash table using separate chaining.
+This repository contains clean, tested implementations of common data structures and algorithms in C#. Day 1 introduced a generic singly linked list, Day 2 added array-backed stack and queue implementations, Day 3 added a hash table using separate chaining, and Day 4 adds searching and basic sorting algorithms.
 
 ## Purpose
 
@@ -27,6 +27,14 @@ DataStructuresAlgorithms-CSharp/
 |-- DataStructuresAlgorithms.sln
 |-- src/
 |   `-- DataStructures/
+|       |-- Algorithms/
+|       |   |-- Searching/
+|       |   |   |-- BinarySearch.cs
+|       |   |   `-- LinearSearch.cs
+|       |   `-- Sorting/
+|       |       |-- BubbleSort.cs
+|       |       |-- InsertionSort.cs
+|       |       `-- SelectionSort.cs
 |       |-- DataStructures.csproj
 |       |-- ArrayStack.cs
 |       |-- CircularQueue.cs
@@ -38,6 +46,8 @@ DataStructuresAlgorithms-CSharp/
 |       |-- ArrayStackTests.cs
 |       |-- CircularQueueTests.cs
 |       |-- SeparateChainingHashTableTests.cs
+|       |-- SearchingAlgorithmsTests.cs
+|       |-- SortingAlgorithmsTests.cs
 |       `-- SinglyLinkedListTests.cs
 `-- README.md
 ```
@@ -46,6 +56,11 @@ DataStructuresAlgorithms-CSharp/
 
 - `DataStructuresAlgorithms.sln`: Groups the source and test projects for building and testing together.
 - `src/DataStructures/DataStructures.csproj`: Defines the .NET 8 class library with nullable reference types enabled.
+- `src/DataStructures/Algorithms/Searching/LinearSearch.cs`: Contains a generic linear search implementation.
+- `src/DataStructures/Algorithms/Searching/BinarySearch.cs`: Contains a generic binary search implementation for sorted input.
+- `src/DataStructures/Algorithms/Sorting/BubbleSort.cs`: Contains a generic in-place bubble sort implementation.
+- `src/DataStructures/Algorithms/Sorting/SelectionSort.cs`: Contains a generic in-place selection sort implementation.
+- `src/DataStructures/Algorithms/Sorting/InsertionSort.cs`: Contains a generic in-place insertion sort implementation.
 - `src/DataStructures/ArrayStack.cs`: Contains the generic array-backed stack implementation.
 - `src/DataStructures/CircularQueue.cs`: Contains the generic circular-array queue implementation.
 - `src/DataStructures/SeparateChainingHashTable.cs`: Contains the generic hash table implementation using separate chaining.
@@ -54,6 +69,8 @@ DataStructuresAlgorithms-CSharp/
 - `tests/DataStructures.Tests/ArrayStackTests.cs`: Verifies stack behavior, resizing, exceptions, and clearing.
 - `tests/DataStructures.Tests/CircularQueueTests.cs`: Verifies queue behavior, circular wrapping, resizing, exceptions, and clearing.
 - `tests/DataStructures.Tests/SeparateChainingHashTableTests.cs`: Verifies hash table behavior, duplicate keys, null keys, resizing, and collisions.
+- `tests/DataStructures.Tests/SearchingAlgorithmsTests.cs`: Verifies linear and binary search behavior.
+- `tests/DataStructures.Tests/SortingAlgorithmsTests.cs`: Verifies bubble, selection, and insertion sort behavior.
 - `tests/DataStructures.Tests/SinglyLinkedListTests.cs`: Verifies empty-list behavior, additions, removals, searches, nullable values, custom equality, enumeration, and count updates.
 - `README.md`: Documents the repository, implementation, commands, learning notes, roadmap, and commit plan.
 
@@ -64,7 +81,8 @@ DataStructuresAlgorithms-CSharp/
 | Day 1 | Singly Linked List | Done |
 | Day 2 | Stack and Queue | Done |
 | Day 3 | Hash Table basics | Done |
-| Day 4 | Searching and Basic Sorting | Next |
+| Day 4 | Searching and Basic Sorting | Done |
+| Day 5 | Merge Sort and Quick Sort | Next |
 
 ## Singly Linked List Explanation
 
@@ -147,6 +165,38 @@ The `SeparateChainingHashTable<TKey, TValue>` supports:
 - `Clear()`: Removes all entries.
 - `ToEnumerable()`: Enumerates all key-value pairs.
 
+## Searching
+
+Searching algorithms locate a target value inside a collection and return its index when found.
+
+### Linear Search
+
+Linear search checks each item from left to right until it finds the target. It works on unsorted input and uses `EqualityComparer<T>.Default` for comparisons.
+
+Linear search is simple and reliable, but it may need to inspect every item.
+
+### Binary Search
+
+Binary search works on sorted input. It repeatedly compares the target with the middle item and discards half of the remaining search range.
+
+Binary search uses `Comparer<T>.Default`, returns the matching index when found, and returns `-1` when the target is missing.
+
+## Sorting
+
+Sorting algorithms reorder values into ascending order. Day 4 includes simple in-place sorting algorithms that are useful for learning comparisons, swaps, and nested loops.
+
+### Bubble Sort
+
+Bubble sort repeatedly compares adjacent items and swaps them when they are out of order. After each pass, the largest remaining item moves toward the end of the array.
+
+### Selection Sort
+
+Selection sort finds the smallest item in the unsorted part of the array and moves it into the next sorted position.
+
+### Insertion Sort
+
+Insertion sort builds the sorted part of the array one item at a time. Each new item is shifted left until it reaches its correct position.
+
 ## Big O Complexity
 
 ### Singly Linked List
@@ -198,6 +248,16 @@ The `SeparateChainingHashTable<TKey, TValue>` supports:
 | `Clear` | O(n) | O(n) | O(1) |
 | `ToEnumerable` | O(n) | O(n) | O(1) |
 
+### Searching and Sorting
+
+| Algorithm | Best Time | Average Time | Worst Time | Extra Space |
+| --- | --- | --- | --- | --- |
+| Linear Search | O(1) | O(n) | O(n) | O(1) |
+| Binary Search | O(1) | O(log n) | O(log n) | O(1) |
+| Bubble Sort | O(n) | O(n^2) | O(n^2) | O(1) |
+| Selection Sort | O(n^2) | O(n^2) | O(n^2) | O(1) |
+| Insertion Sort | O(n) | O(n^2) | O(n^2) | O(1) |
+
 ## How to Run
 
 Build the complete solution from the repository root:
@@ -232,12 +292,14 @@ dotnet test DataStructuresAlgorithms.sln
 - Hash tables trade ordering for fast key-based access.
 - Collisions are expected, so collision handling is part of the data structure design.
 - Separate chaining keeps collision logic readable by linking entries in the same bucket.
+- Linear search works without sorted data.
+- Binary search is fast, but only when the input is sorted.
+- Basic sorting algorithms are not the fastest for large inputs, but they are excellent for learning comparison-based sorting.
 
-## Roadmap for Days 4-7
+## Roadmap for Days 5-7
 
 | Day | Topic |
 | --- | --- |
-| Day 4 | Searching and Basic Sorting |
 | Day 5 | Merge Sort and Quick Sort |
 | Day 6 | Binary Search Tree |
 | Day 7 | Final Review and Improvements |
