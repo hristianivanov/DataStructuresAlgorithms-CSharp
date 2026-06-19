@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository contains clean, tested implementations of common data structures and algorithms in C#. Day 1 introduced a generic singly linked list, Day 2 added array-backed stack and queue implementations, Day 3 added a hash table using separate chaining, and Day 4 adds searching and basic sorting algorithms.
+This repository contains clean, tested implementations of common data structures and algorithms in C#. Day 1 introduced a generic singly linked list, Day 2 added array-backed stack and queue implementations, Day 3 added a hash table using separate chaining, Day 4 added searching and basic sorting algorithms, and Day 5 adds merge sort and quick sort.
 
 ## Purpose
 
@@ -34,6 +34,8 @@ DataStructuresAlgorithms-CSharp/
 |       |   `-- Sorting/
 |       |       |-- BubbleSort.cs
 |       |       |-- InsertionSort.cs
+|       |       |-- MergeSort.cs
+|       |       |-- QuickSort.cs
 |       |       `-- SelectionSort.cs
 |       |-- DataStructures.csproj
 |       |-- ArrayStack.cs
@@ -43,6 +45,7 @@ DataStructuresAlgorithms-CSharp/
 |-- tests/
 |   `-- DataStructures.Tests/
 |       |-- DataStructures.Tests.csproj
+|       |-- AdvancedSortingAlgorithmsTests.cs
 |       |-- ArrayStackTests.cs
 |       |-- CircularQueueTests.cs
 |       |-- SeparateChainingHashTableTests.cs
@@ -61,11 +64,14 @@ DataStructuresAlgorithms-CSharp/
 - `src/DataStructures/Algorithms/Sorting/BubbleSort.cs`: Contains a generic in-place bubble sort implementation.
 - `src/DataStructures/Algorithms/Sorting/SelectionSort.cs`: Contains a generic in-place selection sort implementation.
 - `src/DataStructures/Algorithms/Sorting/InsertionSort.cs`: Contains a generic in-place insertion sort implementation.
+- `src/DataStructures/Algorithms/Sorting/MergeSort.cs`: Contains a generic in-place merge sort implementation.
+- `src/DataStructures/Algorithms/Sorting/QuickSort.cs`: Contains a generic in-place quick sort implementation.
 - `src/DataStructures/ArrayStack.cs`: Contains the generic array-backed stack implementation.
 - `src/DataStructures/CircularQueue.cs`: Contains the generic circular-array queue implementation.
 - `src/DataStructures/SeparateChainingHashTable.cs`: Contains the generic hash table implementation using separate chaining.
 - `src/DataStructures/SinglyLinkedList.cs`: Contains the generic singly linked list implementation and its private node type.
 - `tests/DataStructures.Tests/DataStructures.Tests.csproj`: Defines the .NET 8 xUnit test project and references the class library.
+- `tests/DataStructures.Tests/AdvancedSortingAlgorithmsTests.cs`: Verifies merge sort and quick sort behavior.
 - `tests/DataStructures.Tests/ArrayStackTests.cs`: Verifies stack behavior, resizing, exceptions, and clearing.
 - `tests/DataStructures.Tests/CircularQueueTests.cs`: Verifies queue behavior, circular wrapping, resizing, exceptions, and clearing.
 - `tests/DataStructures.Tests/SeparateChainingHashTableTests.cs`: Verifies hash table behavior, duplicate keys, null keys, resizing, and collisions.
@@ -82,7 +88,8 @@ DataStructuresAlgorithms-CSharp/
 | Day 2 | Stack and Queue | Done |
 | Day 3 | Hash Table basics | Done |
 | Day 4 | Searching and Basic Sorting | Done |
-| Day 5 | Merge Sort and Quick Sort | Next |
+| Day 5 | Merge Sort and Quick Sort | Done |
+| Day 6 | Binary Search Tree | Next |
 
 ## Singly Linked List Explanation
 
@@ -197,6 +204,22 @@ Selection sort finds the smallest item in the unsorted part of the array and mov
 
 Insertion sort builds the sorted part of the array one item at a time. Each new item is shifted left until it reaches its correct position.
 
+## Divide and Conquer
+
+Divide and conquer algorithms split a problem into smaller pieces, solve those pieces, and combine the results. Merge sort and quick sort both use this idea, but they apply it differently.
+
+## Merge Sort
+
+Merge sort divides the array into halves until each section is small, then merges those sections back together in sorted order.
+
+The implementation sorts the input array in place from the caller's perspective, but it uses an additional temporary array while merging. Merge sort has predictable `O(n log n)` time complexity.
+
+## Quick Sort
+
+Quick sort chooses a pivot value, partitions the array so smaller values move to one side and larger values move to the other, then recursively sorts each side.
+
+The implementation uses `Comparer<T>.Default` and a middle pivot to keep the code readable and practical. Quick sort is usually fast, but its worst case is `O(n^2)`.
+
 ## Big O Complexity
 
 ### Singly Linked List
@@ -257,6 +280,8 @@ Insertion sort builds the sorted part of the array one item at a time. Each new 
 | Bubble Sort | O(n) | O(n^2) | O(n^2) | O(1) |
 | Selection Sort | O(n^2) | O(n^2) | O(n^2) | O(1) |
 | Insertion Sort | O(n) | O(n^2) | O(n^2) | O(1) |
+| Merge Sort | O(n log n) | O(n log n) | O(n log n) | O(n) |
+| Quick Sort | O(n log n) | O(n log n) | O(n^2) | O(log n) average |
 
 ## How to Run
 
@@ -295,12 +320,13 @@ dotnet test DataStructuresAlgorithms.sln
 - Linear search works without sorted data.
 - Binary search is fast, but only when the input is sorted.
 - Basic sorting algorithms are not the fastest for large inputs, but they are excellent for learning comparison-based sorting.
+- Merge sort has reliable performance and uses extra memory for merging.
+- Quick sort is usually fast and sorts in place, but pivot quality affects worst-case performance.
 
-## Roadmap for Days 5-7
+## Roadmap for Days 6-7
 
 | Day | Topic |
 | --- | --- |
-| Day 5 | Merge Sort and Quick Sort |
 | Day 6 | Binary Search Tree |
 | Day 7 | Final Review and Improvements |
 
