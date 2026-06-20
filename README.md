@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository contains clean, tested implementations of common data structures and algorithms in C#. Day 1 introduced a generic singly linked list, Day 2 added array-backed stack and queue implementations, Day 3 added a hash table using separate chaining, Day 4 added searching and basic sorting algorithms, and Day 5 adds merge sort and quick sort.
+This repository contains clean, tested implementations of common data structures and algorithms in C#. Day 1 introduced a generic singly linked list, Day 2 added array-backed stack and queue implementations, Day 3 added a hash table using separate chaining, Day 4 added searching and basic sorting algorithms, Day 5 added merge sort and quick sort, and Day 6 adds a binary search tree.
 
 ## Purpose
 
@@ -37,6 +37,8 @@ DataStructuresAlgorithms-CSharp/
 |       |       |-- MergeSort.cs
 |       |       |-- QuickSort.cs
 |       |       `-- SelectionSort.cs
+|       |-- Trees/
+|       |   `-- BinarySearchTree.cs
 |       |-- DataStructures.csproj
 |       |-- ArrayStack.cs
 |       |-- CircularQueue.cs
@@ -47,6 +49,7 @@ DataStructuresAlgorithms-CSharp/
 |       |-- DataStructures.Tests.csproj
 |       |-- AdvancedSortingAlgorithmsTests.cs
 |       |-- ArrayStackTests.cs
+|       |-- BinarySearchTreeTests.cs
 |       |-- CircularQueueTests.cs
 |       |-- SeparateChainingHashTableTests.cs
 |       |-- SearchingAlgorithmsTests.cs
@@ -64,8 +67,9 @@ DataStructuresAlgorithms-CSharp/
 - `src/DataStructures/Algorithms/Sorting/BubbleSort.cs`: Contains a generic in-place bubble sort implementation.
 - `src/DataStructures/Algorithms/Sorting/SelectionSort.cs`: Contains a generic in-place selection sort implementation.
 - `src/DataStructures/Algorithms/Sorting/InsertionSort.cs`: Contains a generic in-place insertion sort implementation.
-- `src/DataStructures/Algorithms/Sorting/MergeSort.cs`: Contains a generic in-place merge sort implementation.
+- `src/DataStructures/Algorithms/Sorting/MergeSort.cs`: Contains a generic merge sort implementation that writes sorted values back into the input array.
 - `src/DataStructures/Algorithms/Sorting/QuickSort.cs`: Contains a generic in-place quick sort implementation.
+- `src/DataStructures/Trees/BinarySearchTree.cs`: Contains the generic binary search tree implementation.
 - `src/DataStructures/ArrayStack.cs`: Contains the generic array-backed stack implementation.
 - `src/DataStructures/CircularQueue.cs`: Contains the generic circular-array queue implementation.
 - `src/DataStructures/SeparateChainingHashTable.cs`: Contains the generic hash table implementation using separate chaining.
@@ -73,6 +77,7 @@ DataStructuresAlgorithms-CSharp/
 - `tests/DataStructures.Tests/DataStructures.Tests.csproj`: Defines the .NET 8 xUnit test project and references the class library.
 - `tests/DataStructures.Tests/AdvancedSortingAlgorithmsTests.cs`: Verifies merge sort and quick sort behavior.
 - `tests/DataStructures.Tests/ArrayStackTests.cs`: Verifies stack behavior, resizing, exceptions, and clearing.
+- `tests/DataStructures.Tests/BinarySearchTreeTests.cs`: Verifies binary search tree insertion, removal, lookup, clearing, and traversal behavior.
 - `tests/DataStructures.Tests/CircularQueueTests.cs`: Verifies queue behavior, circular wrapping, resizing, exceptions, and clearing.
 - `tests/DataStructures.Tests/SeparateChainingHashTableTests.cs`: Verifies hash table behavior, duplicate keys, null keys, resizing, and collisions.
 - `tests/DataStructures.Tests/SearchingAlgorithmsTests.cs`: Verifies linear and binary search behavior.
@@ -89,7 +94,8 @@ DataStructuresAlgorithms-CSharp/
 | Day 3 | Hash Table basics | Done |
 | Day 4 | Searching and Basic Sorting | Done |
 | Day 5 | Merge Sort and Quick Sort | Done |
-| Day 6 | Binary Search Tree | Next |
+| Day 6 | Binary Search Tree | Done |
+| Day 7 | Final Review and Improvements | Next |
 
 ## Singly Linked List Explanation
 
@@ -220,6 +226,26 @@ Quick sort chooses a pivot value, partitions the array so smaller values move to
 
 The implementation uses `Comparer<T>.Default` and a middle pivot to keep the code readable and practical. Quick sort is usually fast, but its worst case is `O(n^2)`.
 
+## Binary Search Tree
+
+A binary search tree stores values in nodes. Each node can have a left child and a right child. Values smaller than a node go to the left side, and values larger than a node go to the right side.
+
+The first node in the tree is the root. A node with no children is a leaf. The left child stores a smaller value, and the right child stores a larger value according to `Comparer<T>.Default`.
+
+The `BinarySearchTree<T>` supports:
+
+- `Add(T value)`: Adds a new value.
+- `Contains(T value)`: Reports whether a value exists.
+- `Remove(T value)`: Removes a value when it exists.
+- `Count`: Returns the number of values.
+- `IsEmpty`: Reports whether the tree has no values.
+- `Clear()`: Removes all nodes.
+- `InOrderTraversal()`: Visits left subtree, node, then right subtree.
+- `PreOrderTraversal()`: Visits node, left subtree, then right subtree.
+- `PostOrderTraversal()`: Visits left subtree, right subtree, then node.
+
+In-order traversal returns values in sorted order for a binary search tree. Pre-order traversal is useful for copying tree shape, and post-order traversal is useful when children should be processed before their parent.
+
 ## Big O Complexity
 
 ### Singly Linked List
@@ -283,6 +309,17 @@ The implementation uses `Comparer<T>.Default` and a middle pivot to keep the cod
 | Merge Sort | O(n log n) | O(n log n) | O(n log n) | O(n) |
 | Quick Sort | O(n log n) | O(n log n) | O(n^2) | O(log n) average |
 
+### Binary Search Tree
+
+| Operation | Average Time Complexity | Worst Time Complexity | Extra Space |
+| --- | --- | --- | --- |
+| `Add` | O(log n) | O(n) | O(n) |
+| `Contains` | O(log n) | O(n) | O(n) |
+| `Remove` | O(log n) | O(n) | O(n) |
+| `InOrderTraversal` | O(n) | O(n) | O(n) |
+| `PreOrderTraversal` | O(n) | O(n) | O(n) |
+| `PostOrderTraversal` | O(n) | O(n) | O(n) |
+
 ## How to Run
 
 Build the complete solution from the repository root:
@@ -322,12 +359,14 @@ dotnet test DataStructuresAlgorithms.sln
 - Basic sorting algorithms are not the fastest for large inputs, but they are excellent for learning comparison-based sorting.
 - Merge sort has reliable performance and uses extra memory for merging.
 - Quick sort is usually fast and sorts in place, but pivot quality affects worst-case performance.
+- Binary search trees keep smaller values to the left and larger values to the right.
+- Tree shape affects performance; a balanced tree is fast, while a highly skewed tree can behave like a linked list.
+- In-order traversal of a binary search tree returns sorted values.
 
-## Roadmap for Days 6-7
+## Roadmap for Day 7
 
 | Day | Topic |
 | --- | --- |
-| Day 6 | Binary Search Tree |
 | Day 7 | Final Review and Improvements |
 
 ## GitHub-Friendly Commit Plan
