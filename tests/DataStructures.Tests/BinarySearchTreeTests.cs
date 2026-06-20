@@ -128,6 +128,20 @@ public class BinarySearchTreeTests
     }
 
     [Fact]
+    public void Remove_OnlyRootNode_ReturnsTrueAndEmptiesTree()
+    {
+        BinarySearchTree<int> tree = new();
+        tree.Add(10);
+
+        bool wasRemoved = tree.Remove(10);
+
+        Assert.True(wasRemoved);
+        Assert.True(tree.IsEmpty);
+        Assert.Equal(0, tree.Count);
+        Assert.Empty(tree.InOrderTraversal());
+    }
+
+    [Fact]
     public void Remove_MissingValue_ReturnsFalse()
     {
         BinarySearchTree<int> tree = CreateTree();

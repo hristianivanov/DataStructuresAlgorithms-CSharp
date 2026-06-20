@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository contains clean, tested implementations of common data structures and algorithms in C#. Day 1 introduced a generic singly linked list, Day 2 added array-backed stack and queue implementations, Day 3 added a hash table using separate chaining, Day 4 added searching and basic sorting algorithms, Day 5 added merge sort and quick sort, and Day 6 adds a binary search tree.
+This repository contains clean, tested implementations of common data structures and algorithms in C#. Day 1 introduced a generic singly linked list, Day 2 added array-backed stack and queue implementations, Day 3 added a hash table using separate chaining, Day 4 added searching and basic sorting algorithms, Day 5 added merge sort and quick sort, and Day 6 added a binary search tree.
 
 ## Purpose
 
@@ -313,12 +313,12 @@ In-order traversal returns values in sorted order for a binary search tree. Pre-
 
 | Operation | Average Time Complexity | Worst Time Complexity | Extra Space |
 | --- | --- | --- | --- |
-| `Add` | O(log n) | O(n) | O(n) |
-| `Contains` | O(log n) | O(n) | O(n) |
-| `Remove` | O(log n) | O(n) | O(n) |
-| `InOrderTraversal` | O(n) | O(n) | O(n) |
-| `PreOrderTraversal` | O(n) | O(n) | O(n) |
-| `PostOrderTraversal` | O(n) | O(n) | O(n) |
+| `Add` | O(log n) | O(n) | O(1) |
+| `Contains` | O(log n) | O(n) | O(1) |
+| `Remove` | O(log n) | O(n) | O(h) recursion stack |
+| `InOrderTraversal` | O(n) | O(n) | O(h) recursion stack |
+| `PreOrderTraversal` | O(n) | O(n) | O(h) recursion stack |
+| `PostOrderTraversal` | O(n) | O(n) | O(h) recursion stack |
 
 ## How to Run
 
