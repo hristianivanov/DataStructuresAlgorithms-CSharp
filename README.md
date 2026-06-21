@@ -1,24 +1,32 @@
 # Data Structures and Algorithms in C#
 
+A professional 7-day C# practice repository implementing foundational data structures and algorithms with clean code, nullable reference types, and xUnit coverage.
+
 ## Overview
 
-This repository contains clean, tested implementations of common data structures and algorithms in C#. Day 1 introduced a generic singly linked list, Day 2 added array-backed stack and queue implementations, Day 3 added a hash table using separate chaining, Day 4 added searching and basic sorting algorithms, Day 5 added merge sort and quick sort, and Day 6 added a binary search tree.
+This repository is a focused learning project for implementing common data structures and algorithms from scratch in C#.
 
-## Purpose
+It favors readable, interview-ready implementations over clever abstractions. The code intentionally avoids built-in collection shortcuts such as `Dictionary<TKey, TValue>` for the custom hash table, built-in sort helpers for sorting algorithms, and built-in tree structures for the binary search tree.
 
-The project is designed for:
+## Why This Repo Exists
 
-- Practicing data structures and algorithms
-- Preparing for technical interviews
-- Demonstrating clean, beginner-friendly C# implementations
-- Documenting time and space complexity
+This project exists to:
+
+- Practice data structures and algorithms in modern C#
+- Build a clean GitHub portfolio repository
+- Prepare for technical interviews
+- Document Big O complexity in a practical way
+- Show steady progress across a 7-day learning plan
 
 ## Tech Stack
 
-- .NET 8
-- C# with nullable reference types enabled
-- xUnit
-- Visual Studio, Visual Studio Code, or the .NET CLI
+| Tool | Purpose |
+| --- | --- |
+| .NET 8 | Target framework |
+| C# | Implementation language |
+| xUnit | Unit testing |
+| Nullable reference types | Safer null handling |
+| .NET CLI | Build, test, and format verification |
 
 ## Project Structure
 
@@ -39,341 +47,147 @@ DataStructuresAlgorithms-CSharp/
 |       |       `-- SelectionSort.cs
 |       |-- Trees/
 |       |   `-- BinarySearchTree.cs
-|       |-- DataStructures.csproj
 |       |-- ArrayStack.cs
 |       |-- CircularQueue.cs
 |       |-- SeparateChainingHashTable.cs
 |       `-- SinglyLinkedList.cs
 |-- tests/
 |   `-- DataStructures.Tests/
-|       |-- DataStructures.Tests.csproj
 |       |-- AdvancedSortingAlgorithmsTests.cs
 |       |-- ArrayStackTests.cs
 |       |-- BinarySearchTreeTests.cs
 |       |-- CircularQueueTests.cs
-|       |-- SeparateChainingHashTableTests.cs
 |       |-- SearchingAlgorithmsTests.cs
-|       |-- SortingAlgorithmsTests.cs
-|       `-- SinglyLinkedListTests.cs
+|       |-- SeparateChainingHashTableTests.cs
+|       |-- SinglyLinkedListTests.cs
+|       `-- SortingAlgorithmsTests.cs
+|-- docs/
+|   `-- complexity-cheatsheet.md
 `-- README.md
 ```
 
-### File Explanations
+## Current Implementation
 
-- `DataStructuresAlgorithms.sln`: Groups the source and test projects for building and testing together.
-- `src/DataStructures/DataStructures.csproj`: Defines the .NET 8 class library with nullable reference types enabled.
-- `src/DataStructures/Algorithms/Searching/LinearSearch.cs`: Contains a generic linear search implementation.
-- `src/DataStructures/Algorithms/Searching/BinarySearch.cs`: Contains a generic binary search implementation for sorted input.
-- `src/DataStructures/Algorithms/Sorting/BubbleSort.cs`: Contains a generic in-place bubble sort implementation.
-- `src/DataStructures/Algorithms/Sorting/SelectionSort.cs`: Contains a generic in-place selection sort implementation.
-- `src/DataStructures/Algorithms/Sorting/InsertionSort.cs`: Contains a generic in-place insertion sort implementation.
-- `src/DataStructures/Algorithms/Sorting/MergeSort.cs`: Contains a generic merge sort implementation that writes sorted values back into the input array.
-- `src/DataStructures/Algorithms/Sorting/QuickSort.cs`: Contains a generic in-place quick sort implementation.
-- `src/DataStructures/Trees/BinarySearchTree.cs`: Contains the generic binary search tree implementation.
-- `src/DataStructures/ArrayStack.cs`: Contains the generic array-backed stack implementation.
-- `src/DataStructures/CircularQueue.cs`: Contains the generic circular-array queue implementation.
-- `src/DataStructures/SeparateChainingHashTable.cs`: Contains the generic hash table implementation using separate chaining.
-- `src/DataStructures/SinglyLinkedList.cs`: Contains the generic singly linked list implementation and its private node type.
-- `tests/DataStructures.Tests/DataStructures.Tests.csproj`: Defines the .NET 8 xUnit test project and references the class library.
-- `tests/DataStructures.Tests/AdvancedSortingAlgorithmsTests.cs`: Verifies merge sort and quick sort behavior.
-- `tests/DataStructures.Tests/ArrayStackTests.cs`: Verifies stack behavior, resizing, exceptions, and clearing.
-- `tests/DataStructures.Tests/BinarySearchTreeTests.cs`: Verifies binary search tree insertion, removal, lookup, clearing, and traversal behavior.
-- `tests/DataStructures.Tests/CircularQueueTests.cs`: Verifies queue behavior, circular wrapping, resizing, exceptions, and clearing.
-- `tests/DataStructures.Tests/SeparateChainingHashTableTests.cs`: Verifies hash table behavior, duplicate keys, null keys, resizing, and collisions.
-- `tests/DataStructures.Tests/SearchingAlgorithmsTests.cs`: Verifies linear and binary search behavior.
-- `tests/DataStructures.Tests/SortingAlgorithmsTests.cs`: Verifies bubble, selection, and insertion sort behavior.
-- `tests/DataStructures.Tests/SinglyLinkedListTests.cs`: Verifies empty-list behavior, additions, removals, searches, nullable values, custom equality, enumeration, and count updates.
-- `README.md`: Documents the repository, implementation, commands, learning notes, roadmap, and commit plan.
-
-## Current Progress
-
-| Day | Topic | Status |
+| Category | Implementation | Main Concepts |
 | --- | --- | --- |
-| Day 1 | Singly Linked List | Done |
-| Day 2 | Stack and Queue | Done |
-| Day 3 | Hash Table basics | Done |
-| Day 4 | Searching and Basic Sorting | Done |
-| Day 5 | Merge Sort and Quick Sort | Done |
-| Day 6 | Binary Search Tree | Done |
-| Day 7 | Final Review and Improvements | Next |
+| Data Structure | Singly Linked List | Nodes, head/tail references, traversal |
+| Data Structure | Array Stack | LIFO, array resizing |
+| Data Structure | Circular Queue | FIFO, circular array, wraparound |
+| Data Structure | Separate Chaining Hash Table | Hashing, collisions, load factor |
+| Data Structure | Binary Search Tree | Root, child nodes, traversal, removal cases |
+| Searching | Linear Search | Sequential scan |
+| Searching | Binary Search | Sorted input, divide search range |
+| Sorting | Bubble Sort | Adjacent swaps |
+| Sorting | Selection Sort | Repeated minimum selection |
+| Sorting | Insertion Sort | Incremental sorted prefix |
+| Sorting | Merge Sort | Divide and conquer, merging |
+| Sorting | Quick Sort | Partitioning, recursion |
 
-## Singly Linked List Explanation
+## Data Structures
 
-A singly linked list stores values in nodes. Each node contains a value and a reference to the next node. The list keeps references to its first node (`head`) and last node (`tail`).
-
-Unlike an array, linked-list nodes do not need to occupy adjacent memory locations. Adding at the beginning is constant time, and tracking the tail also makes adding at the end constant time. Searching and removing by value require walking through the list.
-
-The `SinglyLinkedList<T>` supports:
-
-- `AddFirst(T value)`: Adds a value at the beginning.
-- `AddLast(T value)`: Adds a value at the end.
-- `Remove(T value)`: Removes the first matching value and reports whether it was found.
-- `Contains(T value)`: Reports whether a matching value exists.
-- `Count`: Returns the number of values.
-- `IsEmpty`: Reports whether the list has no values.
-- `ToEnumerable()`: Enumerates values from first to last.
-
-By default, values are matched using `EqualityComparer<T>.Default`. A custom `IEqualityComparer<T>` can be supplied to the constructor when different equality behavior is needed. Enumeration fails fast with an `InvalidOperationException` if the list changes while it is being enumerated.
-
-## Stack
-
-A stack stores items in last-in, first-out order. The last item pushed onto the stack is the first item returned by `Pop`.
-
-The `ArrayStack<T>` uses an internal array and resizes when the array becomes full. This keeps the implementation simple while still providing efficient push and pop operations.
-
-The `ArrayStack<T>` supports:
-
-- `Push(T item)`: Adds an item to the top.
-- `Pop()`: Removes and returns the top item.
-- `Peek()`: Returns the top item without removing it.
-- `Count`: Returns the number of items.
-- `IsEmpty`: Reports whether the stack has no items.
-- `Clear()`: Removes all items.
-- `ToEnumerable()`: Enumerates items from top to bottom.
-
-## Queue
-
-A queue stores items in first-in, first-out order. The first item enqueued is the first item returned by `Dequeue`.
-
-The `CircularQueue<T>` uses an internal circular array. When items are dequeued, the front index moves forward instead of shifting every item. When the array becomes full, the queue resizes and keeps the same front-to-back order.
-
-The `CircularQueue<T>` supports:
-
-- `Enqueue(T item)`: Adds an item to the back.
-- `Dequeue()`: Removes and returns the front item.
-- `Peek()`: Returns the front item without removing it.
-- `Count`: Returns the number of items.
-- `IsEmpty`: Reports whether the queue has no items.
-- `Clear()`: Removes all items.
-- `ToEnumerable()`: Enumerates items from front to back.
-
-## Hash Table
-
-A hash table stores key-value pairs and uses a hash code to decide where each key should live in an internal bucket array. A good hash function spreads keys across buckets so lookup, insertion, and removal are usually very fast.
-
-The `SeparateChainingHashTable<TKey, TValue>` uses `EqualityComparer<TKey>.Default` to compare keys. Null keys are rejected with `ArgumentNullException`, and adding the same key twice throws `ArgumentException`.
-
-### Hashing
-
-Hashing converts a key into an integer hash code. The hash table maps that hash code to a bucket index with modulo arithmetic. For example, a hash code can be mapped into an array index from `0` to `bucketCount - 1`.
-
-### Collisions
-
-A collision happens when two different keys map to the same bucket. Collisions are normal and must be handled correctly.
-
-### Separate Chaining
-
-Separate chaining handles collisions by storing a linked chain of entries inside each bucket. If multiple keys map to the same bucket, the hash table walks that bucket's chain to find the matching key.
-
-The hash table resizes when adding an entry would push the load factor above `0.75`. Resizing creates a larger bucket array and reassigns existing entries to their new buckets.
-
-The `SeparateChainingHashTable<TKey, TValue>` supports:
-
-- `Add(TKey key, TValue value)`: Adds a new key-value pair.
-- `Remove(TKey key)`: Removes a key-value pair by key.
-- `ContainsKey(TKey key)`: Reports whether a key exists.
-- `TryGetValue(TKey key, out TValue value)`: Gets a value when the key exists.
-- `Count`: Returns the number of key-value pairs.
-- `IsEmpty`: Reports whether the hash table has no entries.
-- `Clear()`: Removes all entries.
-- `ToEnumerable()`: Enumerates all key-value pairs.
-
-## Searching
-
-Searching algorithms locate a target value inside a collection and return its index when found.
-
-### Linear Search
-
-Linear search checks each item from left to right until it finds the target. It works on unsorted input, handles empty input by returning `-1`, and uses `EqualityComparer<T>.Default` for comparisons.
-
-Linear search is simple and reliable, but it may need to inspect every item.
-
-### Binary Search
-
-Binary search works on sorted input. It repeatedly compares the target with the middle item and discards half of the remaining search range.
-
-Binary search uses `Comparer<T>.Default`, returns the matching index when found, and returns `-1` when the target is missing or the input is empty.
-
-## Sorting
-
-Sorting algorithms reorder values into ascending order. Day 4 includes simple in-place sorting algorithms that use `Comparer<T>.Default` and are useful for learning comparisons, swaps, and nested loops.
-
-### Bubble Sort
-
-Bubble sort repeatedly compares adjacent items and swaps them when they are out of order. After each pass, the largest remaining item moves toward the end of the array.
-
-### Selection Sort
-
-Selection sort finds the smallest item in the unsorted part of the array and moves it into the next sorted position.
-
-### Insertion Sort
-
-Insertion sort builds the sorted part of the array one item at a time. Each new item is shifted left until it reaches its correct position.
-
-## Divide and Conquer
-
-Divide and conquer algorithms split a problem into smaller pieces, solve those pieces, and combine the results. Merge sort and quick sort both use this idea, but they apply it differently.
-
-## Merge Sort
-
-Merge sort divides the array into halves until each section is small, then merges those sections back together in sorted order.
-
-The implementation sorts the input array in place from the caller's perspective, but it uses an additional temporary array while merging. Merge sort has predictable `O(n log n)` time complexity.
-
-## Quick Sort
-
-Quick sort chooses a pivot value, partitions the array so smaller values move to one side and larger values move to the other, then recursively sorts each side.
-
-The implementation uses `Comparer<T>.Default` and a middle pivot to keep the code readable and practical. Quick sort is usually fast, but its worst case is `O(n^2)`.
-
-## Binary Search Tree
-
-A binary search tree stores values in nodes. Each node can have a left child and a right child. Values smaller than a node go to the left side, and values larger than a node go to the right side.
-
-The first node in the tree is the root. A node with no children is a leaf. The left child stores a smaller value, and the right child stores a larger value according to `Comparer<T>.Default`.
-
-The `BinarySearchTree<T>` supports:
-
-- `Add(T value)`: Adds a new value.
-- `Contains(T value)`: Reports whether a value exists.
-- `Remove(T value)`: Removes a value when it exists.
-- `Count`: Returns the number of values.
-- `IsEmpty`: Reports whether the tree has no values.
-- `Clear()`: Removes all nodes.
-- `InOrderTraversal()`: Visits left subtree, node, then right subtree.
-- `PreOrderTraversal()`: Visits node, left subtree, then right subtree.
-- `PostOrderTraversal()`: Visits left subtree, right subtree, then node.
-
-In-order traversal returns values in sorted order for a binary search tree. Pre-order traversal is useful for copying tree shape, and post-order traversal is useful when children should be processed before their parent.
-
-## Big O Complexity
-
-### Singly Linked List
-
-| Operation | Time Complexity | Extra Space |
+| Structure | Description | Key Operations |
 | --- | --- | --- |
-| `AddFirst` | O(1) | O(1) |
-| `AddLast` | O(1) | O(1) |
-| `Remove` | O(n) | O(1) |
-| `Contains` | O(n) | O(1) |
-| `Count` | O(1) | O(1) |
-| `IsEmpty` | O(1) | O(1) |
-| `ToEnumerable` | O(n) | O(1) |
+| `SinglyLinkedList<T>` | Linked nodes with head and tail references | `AddFirst`, `AddLast`, `Remove`, `Contains` |
+| `ArrayStack<T>` | Resizable array-backed stack | `Push`, `Pop`, `Peek`, `Clear` |
+| `CircularQueue<T>` | Resizable circular array queue | `Enqueue`, `Dequeue`, `Peek`, `Clear` |
+| `SeparateChainingHashTable<TKey, TValue>` | Hash table using bucket chains | `Add`, `Remove`, `ContainsKey`, `TryGetValue` |
+| `BinarySearchTree<T>` | Ordered binary tree using `Comparer<T>.Default` | `Add`, `Remove`, `Contains`, traversals |
 
-### Stack
+## Algorithms
 
-| Operation | Time Complexity | Extra Space |
+| Algorithm | Type | Notes |
 | --- | --- | --- |
-| `Push` | O(1) amortized | O(1) |
-| `Pop` | O(1) | O(1) |
-| `Peek` | O(1) | O(1) |
-| `Count` | O(1) | O(1) |
-| `IsEmpty` | O(1) | O(1) |
-| `Clear` | O(n) | O(1) |
-| `ToEnumerable` | O(n) | O(1) |
+| Linear Search | Searching | Works on unsorted input |
+| Binary Search | Searching | Requires sorted input |
+| Bubble Sort | Sorting | Simple adjacent-swap algorithm |
+| Selection Sort | Sorting | Finds the next smallest item |
+| Insertion Sort | Sorting | Efficient for small or nearly sorted input |
+| Merge Sort | Sorting | Stable divide-and-conquer sort with `O(n)` extra space |
+| Quick Sort | Sorting | In-place partitioning sort with fast average performance |
 
-### Queue
+## Big O Complexity Summary
 
-| Operation | Time Complexity | Extra Space |
-| --- | --- | --- |
-| `Enqueue` | O(1) amortized | O(1) |
-| `Dequeue` | O(1) | O(1) |
-| `Peek` | O(1) | O(1) |
-| `Count` | O(1) | O(1) |
-| `IsEmpty` | O(1) | O(1) |
-| `Clear` | O(n) | O(1) |
-| `ToEnumerable` | O(n) | O(1) |
-
-### Hash Table
-
-| Operation | Average Time Complexity | Worst Time Complexity | Extra Space |
+| Implementation | Average Time | Worst Time | Extra Space |
 | --- | --- | --- | --- |
-| `Add` | O(1) amortized | O(n) | O(1) |
-| `Remove` | O(1) | O(n) | O(1) |
-| `ContainsKey` | O(1) | O(n) | O(1) |
-| `TryGetValue` | O(1) | O(n) | O(1) |
-| `Count` | O(1) | O(1) | O(1) |
-| `IsEmpty` | O(1) | O(1) | O(1) |
-| `Clear` | O(n) | O(n) | O(1) |
-| `ToEnumerable` | O(n) | O(n) | O(1) |
+| Singly Linked List search/remove | O(n) | O(n) | O(1) |
+| Stack push/pop/peek | O(1) | O(1) | O(1) |
+| Queue enqueue/dequeue/peek | O(1) | O(1) | O(1) |
+| Hash Table add/search/remove | O(1) | O(n) | O(1) |
+| Binary Search Tree add/search/remove | O(log n) | O(n) | O(1) to O(h) |
+| Linear Search | O(n) | O(n) | O(1) |
+| Binary Search | O(log n) | O(log n) | O(1) |
+| Bubble Sort | O(n^2) | O(n^2) | O(1) |
+| Selection Sort | O(n^2) | O(n^2) | O(1) |
+| Insertion Sort | O(n^2) | O(n^2) | O(1) |
+| Merge Sort | O(n log n) | O(n log n) | O(n) |
+| Quick Sort | O(n log n) | O(n^2) | O(log n) average |
 
-### Searching and Sorting
+For a more detailed reference, see [Complexity Cheatsheet](docs/complexity-cheatsheet.md).
 
-| Algorithm | Best Time | Average Time | Worst Time | Extra Space |
-| --- | --- | --- | --- | --- |
-| Linear Search | O(1) | O(n) | O(n) | O(1) |
-| Binary Search | O(1) | O(log n) | O(log n) | O(1) |
-| Bubble Sort | O(n) | O(n^2) | O(n^2) | O(1) |
-| Selection Sort | O(n^2) | O(n^2) | O(n^2) | O(1) |
-| Insertion Sort | O(n) | O(n^2) | O(n^2) | O(1) |
-| Merge Sort | O(n log n) | O(n log n) | O(n log n) | O(n) |
-| Quick Sort | O(n log n) | O(n log n) | O(n^2) | O(log n) average |
+## How To Run Locally
 
-### Binary Search Tree
-
-| Operation | Average Time Complexity | Worst Time Complexity | Extra Space |
-| --- | --- | --- | --- |
-| `Add` | O(log n) | O(n) | O(1) |
-| `Contains` | O(log n) | O(n) | O(1) |
-| `Remove` | O(log n) | O(n) | O(h) recursion stack |
-| `InOrderTraversal` | O(n) | O(n) | O(h) recursion stack |
-| `PreOrderTraversal` | O(n) | O(n) | O(h) recursion stack |
-| `PostOrderTraversal` | O(n) | O(n) | O(h) recursion stack |
-
-## How to Run
-
-Build the complete solution from the repository root:
+Clone the repository and build the solution:
 
 ```bash
+git clone https://github.com/hristianivanov/DataStructuresAlgorithms-CSharp.git
+cd DataStructuresAlgorithms-CSharp
 dotnet build DataStructuresAlgorithms.sln
 ```
 
-This repository currently contains a class library rather than an executable application. Use the tests to exercise the implementation.
+## How To Run Tests
 
-## Running Tests
-
-Run all tests from the repository root:
+Run the full xUnit test suite:
 
 ```bash
 dotnet test DataStructuresAlgorithms.sln
 ```
 
-## Learning Notes
+Run Release build verification:
 
-- A linked list trades direct indexed access for efficient insertion at known ends.
-- A private nested node keeps implementation details hidden from consumers.
-- `EqualityComparer<T>.Default` compares generic values correctly without restricting `T`.
-- Accepting an `IEqualityComparer<T>` allows callers to define equality without changing the data structure.
-- Updating both head and tail references is important when removing the only node.
-- Maintaining `Count` makes size checks constant time.
-- Iterator methods using `yield return` expose values without exposing internal nodes.
-- Detecting modifications during enumeration avoids silently returning inconsistent results.
-- A stack is useful when the most recent item must be processed first.
-- A queue is useful when items must be processed in arrival order.
-- Circular arrays avoid shifting queue items after every dequeue.
-- Hash tables trade ordering for fast key-based access.
-- Collisions are expected, so collision handling is part of the data structure design.
-- Separate chaining keeps collision logic readable by linking entries in the same bucket.
-- Linear search works without sorted data.
-- Binary search is fast, but only when the input is sorted.
-- Basic sorting algorithms are not the fastest for large inputs, but they are excellent for learning comparison-based sorting.
-- Merge sort has reliable performance and uses extra memory for merging.
-- Quick sort is usually fast and sorts in place, but pivot quality affects worst-case performance.
-- Binary search trees keep smaller values to the left and larger values to the right.
-- Tree shape affects performance; a balanced tree is fast, while a highly skewed tree can behave like a linked list.
-- In-order traversal of a binary search tree returns sorted values.
+```bash
+dotnet build DataStructuresAlgorithms.sln -c Release
+```
 
-## Roadmap for Day 7
+Run formatting verification:
 
-| Day | Topic |
-| --- | --- |
-| Day 7 | Final Review and Improvements |
+```bash
+dotnet format --verify-no-changes
+```
 
-## GitHub-Friendly Commit Plan
+## 7-Day Progress Log
 
-1. **Initialize solution structure**
-   - Add the .NET 8 solution, class library, and xUnit test project.
-2. **Add singly linked list implementation**
-   - Add the generic linked list and its required operations.
-3. **Add linked list tests and README documentation**
-   - Add xUnit coverage and complete Day 1 documentation.
+| Day | Focus | Status |
+| --- | --- | --- |
+| Day 1 | Singly Linked List | Done |
+| Day 2 | Stack and Queue | Done |
+| Day 3 | Hash Table | Done |
+| Day 4 | Searching and Basic Sorting | Done |
+| Day 5 | Merge Sort and Quick Sort | Done |
+| Day 6 | Binary Search Tree | Done |
+| Day 7 | Final Review and Documentation | Done |
+
+## What I Learned
+
+- How to model data structures with small, focused public APIs
+- How to use generic types and default comparers effectively
+- How to reason about edge cases such as empty input, duplicates, null values, resizing, collisions, and removal cases
+- How traversal order changes the output of tree algorithms
+- How algorithm choice changes time and space complexity
+- How to keep tests focused without overbuilding the repository
+- How to present a learning project professionally on GitHub
+
+## Future Improvements
+
+- Add diagrams for linked lists, queues, hash tables, and trees
+- Add benchmark projects later, separate from the beginner-friendly implementations
+- Add more advanced data structures such as heaps, tries, and graphs
+- Add balanced trees such as AVL or red-black trees
+- Add graph traversal algorithms such as BFS and DFS
+- Add GitHub Actions CI for automated build and test verification
+
+## Repository Status
+
+- 7-day implementation plan complete
+- 98 passing tests at final verification
+- Clean Release build
+- Format verification included in final polish
