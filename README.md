@@ -1,6 +1,6 @@
 # Data Structures and Algorithms in C#
 
-A professional 7-day C# practice repository implementing foundational data structures and algorithms with clean code, nullable reference types, and xUnit coverage.
+A 7-day C# practice repository implementing foundational data structures and algorithms with clean code, nullable reference types, and xUnit coverage.
 
 ## Overview
 
@@ -165,6 +165,10 @@ dotnet format --verify-no-changes
 | Day 5 | Merge Sort and Quick Sort | Done |
 | Day 6 | Binary Search Tree | Done |
 | Day 7 | Final Review and Documentation | Done |
+
+## Commit History
+
+The commit history is organized by day and by topic. Each implementation was committed separately from its tests and documentation, making the progression easy to review.
 
 ## What I Learned
 
